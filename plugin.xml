@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova.check.phone.calls"
+    version="0.0.1">
+
+    <name>cordova.check.phone.calls</name>
+    <description>
+        Check if the device is able to execute phone calls 
+    </description>
+    <license>MIT</license>
+
+    <engines>
+        <!--
+            ...
+        -->
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <js-module src="www/check.phone.js">
+       <clobbers target="navigator.checkPhone" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="CheckPhonePlugin">
+                <param name="android-package" value="cordova.check.phone.calls.CheckPhonePlugin"/>
+            </feature>   
+        </config-file>
+
+        <source-file src="src/android/CheckPhonePlugin.java" target-dir="src/org/apache/cordova/checkPhonePlugin" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <plugins-plist key="CheckPhonePlugin" string="CheckPhonePlugin" />
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="CheckPhonePlugin">
+                <param name="ios-package" value="CheckPhonePlugin" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CheckPhonePlugin.h" />
+        <source-file src="src/ios/CheckPhonePlugin.m" />
+    </platform>
+</plugin>
